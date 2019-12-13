@@ -11356,3 +11356,38 @@ a.text-dark:focus {
   }
 }
 
+.counters {
+  margin-right: 30px;
+  font-size: 10px;
+  text-align: center;
+}
+
+.counters strong {
+  display: block;
+  font-size: 16px;
+}
+
+.counters .vote,
+.counters .answer {
+  width: 60px;
+  height: 60px;
+}
+
+.counters .status.unanswred {
+  border: none;
+}
+
+.counters .status.answered {
+  border: 1px solid #5fbd7e;
+  color: #5fbd7e;
+}
+
+.counters .status.answered-accepted {
+  background: #5fbd7e;
+  color: #fff;
+}
+
+.counters .view {
+  margin-top: 10px;
+}
+
