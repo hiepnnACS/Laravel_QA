@@ -15,7 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/questions', 'QuestionsController');
+/**
+ *	Khi thay đổi phương thức mặc của resource thì phải vào RouteServicePr.. để custom lại
+ *  k thì trong Question $question của phương thức show sẽ k lấy ra được bản ghi tương ứng
+ */
+
+Route::resource('/questions', 'QuestionsController')->except('show');
+Route::get('/questions/{slug}', 'QuestionsController@show')->name('questions.show');
 
 Auth::routes();
 
