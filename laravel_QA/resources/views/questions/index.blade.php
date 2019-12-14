@@ -47,14 +47,22 @@
                         
 
                         <div class="ml-auto justify-content-center">
-                            <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-outline-secondary">Edit</a>
-                            
-                            <form class="form-delete" action="{{ route('questions.destroy', $question->id) }}" method="post">
-                                @method('DELETE')
-                                @csrf
-                                
-                                <button type="submit" class="btn btn-outline-danger" onclick="confirm('Bạn có chắc muốn xóa')">Delete</button>
-                            </form>
+                            {{-- @if(Auth::user()->can('update-question', $question)) --}}
+                            @can('update', $question)
+                                <a href="{{ route('questions.edit', $question->id) }}" class="btn btn-outline-secondary">Edit</a>
+                            @endcan
+                            {{-- @endif --}}
+
+                            {{-- @if(Auth::user()->can('delete-question', $question)) --}}
+                            @can('delete', $question)
+                                <form class="form-delete" action="{{ route('questions.destroy', $question->id) }}" method="post">
+                                    @method('DELETE')
+                                    @csrf
+                                    
+                                    <button type="submit" class="btn btn-outline-danger" onclick="confirm('Bạn có chắc muốn xóa')">Delete</button>
+                                </form>
+                            @endcan
+                            {{-- @endif --}}
 
                         </div>
                       
