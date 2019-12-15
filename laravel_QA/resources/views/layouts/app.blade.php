@@ -23,7 +23,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="" href="{{ url('/') }}">
+                <a class="" href="{{ route('questions.index')}}">
                     <img  width="80" src="{{ asset('images/logo/kaopiz.png') }}" alt="">
                 </a>
                 <a style="width: 100%; font-size: 16px;" class="text-center">Mọi người có trách nhiệm trả lời bạn!</a>

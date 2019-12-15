@@ -43,9 +43,11 @@ class AnswerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Question $question, Answer $answer)
     {
-        //
+        $this->authorize('update', $answer);
+
+        return view('answers._edit', compact('question', 'answer'));
     }
 
     /**
@@ -55,9 +57,15 @@ class AnswerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Question $question, Answer $answer)
     {
-        //
+        $this->authorize('update', $answer);
+
+        $answer->update($request->validate([   
+            'body' => 'required',
+        ]));
+
+        return redirect()->route('questions.show', $question->slug)->with('success', 'Your answer has been updated'); 
     }
 
     /**
@@ -66,8 +74,12 @@ class AnswerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Question $question, Answer $answer)
     {
-        //
+        $this->authorize('delete', $answer);
+
+        $answer->delete();
+
+        return redirect()->route('questions.show', $question->slug)->with('success', 'Your answer has been delete');  
     }
 }
