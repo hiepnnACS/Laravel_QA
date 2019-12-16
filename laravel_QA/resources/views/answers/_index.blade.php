@@ -19,9 +19,26 @@
                             <a title="This question is not useful" class="vote-down off" >
                                 <i class="fas fa-caret-down fa-3x"></i>
                             </a>
-                            <a title="Click to mark as favorite question (Click again to undo) " class=" mt-2 {{ $answer->status }}">
-                                <i class="fas fa-check fa-2x"></i>
-                            </a>
+
+                            @can('accept', $answer)
+                                <a title="Click to mark as favorite question (Click again to undo) " class=" mt-2 {{ $answer->status }}"
+                                onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit();">
+                                    <i class="fas fa-check fa-2x"></i>
+                                </a>
+                                <form id="accept-answer-{{ $answer->id }}" action="{{ route('answers.accept', $answer->id) }}" method="post" style="display: none">
+                                    @csrf
+                                </form>
+
+                                @else 
+
+                                @if($answer->is_best)
+                                    <a title="Click to mark as favorite question (Click again to undo) " class=" mt-2 {{ $answer->status }}">
+                                        <i class="fas fa-check fa-2x"></i>
+                                    </a>
+                                @endif
+
+                            @endcan
+
                         </div>
                         <div class="media-body">
                             {!! $answer->body_html !!}

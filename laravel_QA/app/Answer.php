@@ -50,4 +50,9 @@ class Answer extends Model
     {
         return $this->id === $this->question->best_answers_id ? 'vote-useful' : '';
     }
+
+    public function getIsBestAttribute()
+    {
+        return $this->id === $this->question->best_answers_id;
+    }
 }

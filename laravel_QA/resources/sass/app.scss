@@ -74,8 +74,8 @@
         }
         
         &.favorite {
-            &.favorite, &.favorite:hover {
-                color: $warning;
+            &.favorited, &.favorited:hover {
+                color: #cb9d05;
             }
         }
         &.vote-useful {

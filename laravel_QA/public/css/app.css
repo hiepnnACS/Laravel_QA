@@ -11428,9 +11428,9 @@ a.text-dark:focus {
   color: #adb5bd;
 }
 
-.vote-controls a.favorite.favorite,
-.vote-controls a.favorite.favorite:hover {
-  color: #ffed4a;
+.vote-controls a.favorite.favorited,
+.vote-controls a.favorite.favorited:hover {
+  color: #cb9d05;
 }
 
 .vote-controls a.vote-useful {
