@@ -11437,3 +11437,8 @@ a.text-dark:focus {
   color: #38c172;
 }
 
+.post {
+  padding: 20px 0px;
+  border-bottom: 1px solid gray;
+}
+

@@ -1,10 +1,8 @@
-<?php
+	<?php
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'QuestionsController@index');
 
 /**
  *	Khi thay đổi phương thức mặc của resource thì phải vào RouteServicePr.. để custom lại
