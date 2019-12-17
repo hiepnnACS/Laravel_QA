@@ -12,32 +12,23 @@
                 @foreach($answers as $answer)
                         <div class="media">
                             <div class="d-flex d-flex-column vote-controls">
-                            <a title="This question is useful" class="vote-up">
+                            <a title="This answer is useful" class="vote-up {{ Auth::Guest() ? 'off' : '' }}" onclick="event.preventDefault(); document.getElementById('up-vote-answer-{{ $answer->id }}').submit();">
                                 <i class="fas fa-caret-up fa-3x"></i>
                             </a>
-                            <span class="votes-count">1230</span>
-                            <a title="This question is not useful" class="vote-down off" >
+                            <form id="up-vote-answer-{{ $answer->id }}" action="/answers/{{ $answer->id }}/vote" method="post">
+                                @csrf
+                                <input type="hidden" name="vote" value="1">
+                            </form>
+                            <span class="votes-count">{{ $answer->votes_count }}</span>
+                            <a title="This answer is not useful" class="vote-down {{ Auth::Guest() ? 'off' : '' }}"  onclick="event.preventDefault(); document.getElementById('down-vote-answer-{{ $answer->id }}').submit();">
                                 <i class="fas fa-caret-down fa-3x"></i>
                             </a>
+                            <form method="post" id="down-vote-answer-{{ $answer->id }}" action="/answers/{{ $answer->id }}/vote">
+                                @csrf
+                                <input type="hidden" name="vote" value="-1">
+                            </form>
 
-                            @can('accept', $answer)
-                                <a title="Click to mark as favorite question (Click again to undo) " class=" mt-2 {{ $answer->status }}"
-                                onclick="event.preventDefault(); document.getElementById('accept-answer-{{ $answer->id }}').submit();">
-                                    <i class="fas fa-check fa-2x"></i>
-                                </a>
-                                <form id="accept-answer-{{ $answer->id }}" action="{{ route('answers.accept', $answer->id) }}" method="post" style="display: none">
-                                    @csrf
-                                </form>
-
-                                @else 
-
-                                @if($answer->is_best)
-                                    <a title="Click to mark as favorite question (Click again to undo) " class=" mt-2 {{ $answer->status }}">
-                                        <i class="fas fa-check fa-2x"></i>
-                                    </a>
-                                @endif
-
-                            @endcan
+                            
 
                         </div>
                         <div class="media-body">
@@ -64,17 +55,11 @@
                                 </div>
                                 <div class="col-4"></div>
                                 <div class="col-4">
-                                    <span class="text-muted">
-                                        Answered {{ $answer->created_date }}
-                                        <div class="media mt-2">
-                                            <a href="{{ $answer->user->url }}" class="pr-2">
-                                                <img src="{{ $answer->user->avatar }}" alt="">
-                                            </a>
-                                            <div class="media-body mt-1">
-                                                <a href="{{ $answer->user->url }}">{{ $answer->user->name }}</a>
-                                            </div>
-                                        </div>
-                                    </span>
+                                    @include('shared._author', [
+                                        'model' => $answer,
+                                        'label' => 'answered'
+                                    ])
+                                    
                                 </div> 
                             </div>
                         </div>

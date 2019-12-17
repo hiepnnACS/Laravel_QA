@@ -22,8 +22,12 @@ Route::resource('questions.answers', 'AnswerController')->except('index', 'creat
 Route::post('/answers/{answer}/accept', 'AcceptAnswerController')->name('answers.accept');
 
 // favorite
-Route::post('/question/{question}/favorite', 'FavoritesController@store')->name('question.favorite');
-Route::delete('/question/{question}/favorite', 'FavoritesController@destroy')->name('question.destroy');
+Route::post('/questions/{question}/favorite', 'FavoritesController@store')->name('question.favorite');
+Route::delete('/questions/{question}/favorite', 'FavoritesController@destroy')->name('question.destroy');
+
+// voteControl
+Route::post('/questions/{question}/vote', 'VoteQuestionController');
+Route::post('answers/{answer}/vote', 'VoteAnswerController');
 // ------/
 Auth::routes();
 
