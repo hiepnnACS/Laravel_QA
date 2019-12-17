@@ -11439,6 +11439,26 @@ a.text-dark:focus {
 
 .post {
   padding: 20px 0px;
+  box-shadow: 5px 4px 10px -5px #727272;
+}
+
+.post:not(:last-child) {
   border-bottom: 1px solid gray;
+}
+
+.lead {
+  font-size: 16px !important;
+}
+
+.top-question {
+  background: rgba(0, 0, 0, 0.77);
+}
+
+.title-top-question {
+  color: #9a9a9a;
+}
+
+[v-cloak] {
+  display: none;
 }
 

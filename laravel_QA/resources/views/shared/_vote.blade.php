@@ -5,8 +5,8 @@
     @endphp
 @elseif ($model instanceof App\Answer)
     @php 
-        $name = 'answer';
-        $firstURISegment = 'answer';
+        $name = 'answers';
+        $firstURISegment = 'answers';
     @endphp
 @endif
 @php

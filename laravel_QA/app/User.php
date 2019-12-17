@@ -19,6 +19,8 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+    protected $appends = ['avatar'];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -60,7 +62,6 @@ class User extends Authenticatable
 
         return "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?s=" . $size;
     }
-
     public function favorites()
     {
         return $this->belongsToMany(Question::class, 'favorites')->withTimestamps();
@@ -70,6 +71,7 @@ class User extends Authenticatable
     {
         return $this->morphedByMany(Question::class, 'voteable');
     }
+
 
     public function votesAnswers()
     {

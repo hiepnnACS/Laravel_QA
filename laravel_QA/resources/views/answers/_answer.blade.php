@@ -1,15 +1,24 @@
+<answer :answer="{{ $answer }}" inline-template>
 <div class="media post">
     @include('shared._vote', [
         'model' => $answer
     ])
     
     <div class="media-body">
-        {!! $answer->body_html !!}
+        <form v-if="editing">
+            <div class="form-group">
+                <textarea class="form-control" v-model="body" cols="30" rows="10"></textarea>
+            </div>
+            <button class="btn btn-outline-secondary" type="button" {{-- @click="editing = false"  --}} @click="update">Update</button>
+            <button class="btn btn-outline-secondary" @click="editing = false">Cancel</button>
+        </form>
+        <div v-else>
+        <div v-html="bodyHtml"></div>
         <div class="row">
             <div class="col-4">
                 <div class="ml-auto">
                     @can('update', $answer)
-                        <a href="{{ route('questions.answers.edit', [$question->id, $answer->id]) }}" class="btn btn-outline-secondary">Edit</a>
+                        <a @click.prevent="editing = true" class="btn btn-outline-secondary">Edit</a>
                     @endcan
                     {{-- @endif --}}
 
@@ -27,12 +36,16 @@
             </div>
             <div class="col-4"></div>
             <div class="col-4">
-                @include('shared._author', [
+                {{-- @include('shared._author', [
                     'model' => $answer,
                     'label' => 'answered'
-                ])
-                
+                ]) --}}
+
+                <user-info :model="{{ $answer }}" label="Answer"></user-info>
             </div> 
+         </div>
         </div>
     </div>
 </div>
+
+</answer>
